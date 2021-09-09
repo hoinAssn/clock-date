@@ -7,9 +7,10 @@
 
 void hour(void);
 void date(void);
+void printscreen(void);
 
 int main() {
-	system("mode con cols=100 lines=25");
+	system("mode con cols=101 lines=25");
 	int a;
 
 	printf("1. 시계 / 2. 달력 >> ");
@@ -49,9 +50,15 @@ void date(void) {
 	system("cls");
 
 	printf("\n%47d년 %d월\n\n", year, month);
-	printf("")
+	printscreen();
 	/*if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
 		printf("%d년은 윤년입니다.", year);
 	else
 		printf("%d년은 윤년이 아닙니다.", year);*/
+}
+
+void printscreen(void) {
+	printf("     -------------------------------------------------------------------------------------------     ");
+	printf("     |    MON    |    TES    |            |            |            |            |           |     ");
+	printf("     -------------------------------------------------------------------------------------------     ");
 }
