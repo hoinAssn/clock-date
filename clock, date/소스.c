@@ -20,6 +20,8 @@ int main() {
 		case 2: date(); break;
 		default: break;
 	}
+
+	return 0;
 }
 
 void hour(void) {
