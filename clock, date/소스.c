@@ -10,7 +10,7 @@ void date(void);
 void printscreen(void);
 
 int main() {
-	system("mode con cols=109 lines=25");
+	system("mode con cols=50 lines=10");
 	int a;
 
 	printf("1. 시계 / 2. 달력 >> ");
@@ -29,19 +29,18 @@ void hour(void) {
 void date(void) {
 	int year, month;
 
-
-	printf("몇년 몇월을 볼지 입력해주세요 ex)2008 10 (단, 2000년부터 가능합니다) >> ");
+	printf("몇년 몇월을 볼지 입력해주세요 ex)2008 10\n(단, 2000년부터 2050년까지만 가능합니다) >> ");
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
 
-	if (month > 12) {
-		printf("\n입력하신 날짜가 12월보다 큽니다 다시 입력해주세요");
+	if (year < 2000 || month>12 || month < 1) {
+		printf("\n입력하신 날짜가 2000년보다 작거나 12월보다 크거나 1월보다 작습니다 다시 입력해주세요");
 		Sleep(2000);
 		system("cls");
 		date();
 	}
 
-	else if (month < 1) {
-		printf("\n입력하신 날짜가 1월보다 작습니다 다시 입력해주세요");
+	else if (year > 2050 || month>12 || month < 1) {
+		printf("\n입력하신 날짜가 2000년보다 작거나 12월보다 크거나 1월보다 작습니다 다시 입력해주세요");
 		Sleep(2000);
 		system("cls");
 		date();
@@ -49,6 +48,7 @@ void date(void) {
 
 	Sleep(500);
 	system("cls");
+	system("mode con cols=109 lines=25");
 
 	printf("\n%47d년 %d월\n\n", year, month);
 	printscreen();
