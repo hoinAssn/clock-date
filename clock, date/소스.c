@@ -30,7 +30,7 @@ void date(void) {
 	int year, month;
 
 
-	printf("몇년 몇월을 볼지 입력해주세요 ex)2008 10 (단, 2000년부터 가능합니다) >> ");
+	printf("몇년 몇월을 볼지 입력해주세요 ex)2008 10 (단, 2000년부터 가능합니다) >> ");ㄱㅇ
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
 
 	if (month > 12) {
