@@ -27,7 +27,7 @@ void hour(void) {
 }
 
 void date(void) {
-	int year, month;
+	int year=0, month=0;
 
 	printf("몇년 몇월을 볼지 입력해주세요 ex)2008 10\n(단, 2000년부터 2050년까지만 가능합니다) >> ");
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
@@ -37,6 +37,7 @@ void date(void) {
 		Sleep(3000);
 		system("cls");
 		date();
+		return 0;
 	}
 
 	else if (year > 2050 || month > 12 || month < 1) {
@@ -44,6 +45,7 @@ void date(void) {
 		Sleep(3000);
 		system("cls");
 		date();
+		return 0;
 	}
 
 	Sleep(500);
