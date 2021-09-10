@@ -10,7 +10,7 @@ void date(void);
 void printscreen(void);
 
 int main() {
-	system("mode con cols=50 lines=10");
+	system("mode con cols=60 lines=15");
 	int a;
 
 	printf("1. 시계 / 2. 달력 >> ");
@@ -33,15 +33,15 @@ void date(void) {
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
 
 	if (year < 2000 || month > 12 || month < 1) {
-		printf("\n입력하신 날짜가 2000년보다 작거나 12월보다 크거나 1월보다 작습니다 다시 입력해주세요");
-		Sleep(2000);
+		printf("\n입력하신 날짜가 2000년보다 작거나\n12월보다 크거나 1월보다 작습니다\n다시 입력해주세요");
+		Sleep(3000);
 		system("cls");
 		date();
 	}
 
 	else if (year > 2050 || month > 12 || month < 1) {
-		printf("\n입력하신 날짜가 2050년보다 크거나 12월보다 크거나 1월보다 작습니다 다시 입력해주세요");
-		Sleep(2000);
+		printf("\n입력하신 날짜가 2050년보다 크거나\n12월보다 크거나 1월보다 작습니다\n다시 입력해주세요");
+		Sleep(3000);
 		system("cls");
 		date();
 	}
