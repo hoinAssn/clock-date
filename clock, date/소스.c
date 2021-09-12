@@ -15,6 +15,7 @@ int main() {
 
 	printf("1. 시계 / 2. 달력 >> ");
 	scanf_s("%d", &a, sizeof(a));
+
 	switch (a) {
 		case 1: hour(); break;
 		case 2: date(); break;
