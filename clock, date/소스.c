@@ -8,10 +8,8 @@
 void hour(void);
 void date(void);
 int leapyear(int);
-void printscreen(void);
 
 int main() {
-	system("mode con cols=40 lines=10");
 	int a;
 
 	printf("1. 시계 / 2. 달력 >> ");
@@ -68,24 +66,26 @@ void date(void) {
 
 	Sleep(500);
 	system("cls");
-	system("mode con cols=109 lines=25");
 
-	printf("\n%47d년 %d월\n\n", year, month);
-	printscreen();
+	printf("\n%24d년 %d월\n\n", year, month);
+
+    printf("SUN\tMON\tTUS\tWED\tTHU\tFRI\tSAT\n");
+    printf("===================================================\n");
 
     for (int j = 0; j < k; j++) {
-        printf("            ");
+        printf("\t");
     }
 
     for (int i = 1; i <= basicyear[month - 1]; i++) {
 
-        printf("%02d           ", i);
+        printf("%d\t", i);
         if (k == 6) {
             k = -1;
             printf("\n");
         }
         k++;
     }
+
     printf("\n");
 }
 
@@ -96,10 +96,4 @@ int leapyear(int a) {
     else {
         return 0;
     }
-}
-
-void printscreen(void) {
-	printf("     ---------------------------------------------------------------------------------------------     \n");
-	printf("     |     SUN          MON          TUE          WED          THU          FRI          SAT     |     \n");
-	printf("     ---------------------------------------------------------------------------------------------     \n");
 }
