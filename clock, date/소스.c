@@ -72,6 +72,21 @@ void date(void) {
 
 	printf("\n%47d년 %d월\n\n", year, month);
 	printscreen();
+
+    for (int j = 0; j < k; j++) {
+        printf("              ");
+    }
+
+    for (int i = 1; i <= basicyear[month - 1]; i++) {
+
+        printf("            %d", i);
+        if (k == 6) {
+            k = -1;
+            printf("\n");
+        }
+        k++;
+    }
+    printf("\n");
 }
 
 int leapyear(int a) {
@@ -85,84 +100,6 @@ int leapyear(int a) {
 
 void printscreen(void) {
 	printf("     ---------------------------------------------------------------------------------------------------     ");
-	printf("     |     SUN     |     MON     |     TUE     |     WED     |     THU     |     FRI     |     SAT     |     ");
-	printf("     ---------------------------------------------------------------------------------------------------     ");
-
+	printf("     |     SUN\tMON\tTUE\tWED\tTHU\tFRI\tSAT\t");
+	printf("     ---------------------------------------------------------------------------------------------------     \n");
 }
-
-/*#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <Windows.h>
-#include <math.h>
-#include <time.h>
-
-int leapyear(int);
-
-int main() {
-    int year; // 사용자 입력 변수
-    int month; // 사용자 입력 변수
-    int k; // 저장용 변수
-    int sum = 0; // 현재의 모든 일 계산 변수
-    int chk = 0; // 윤년 확인 변수
-    int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 }; // 기본 1~12월 일수
-
-    printf("몇년 몇월을 볼지 입력해주세요\n\n\nex)2018 03 >> ");
-    scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
-
-    //윤달 확인
-    if (leapyear(year)) {
-        chk = 1;
-        basicyear[1]++;
-    }
-    else
-        chk = 0;
-
-    //0년부터 작년까지 며칠인지 셈
-    sum = 365;
-    for (int i = 1; i < year; i++) {
-        if (leapyear(i))
-            sum += 366;
-        else
-            sum += 365;
-    }
-
-    //입력한 달까지 며칠인지 
-    for (int i = 0; i < month - 1; i++) {
-        sum += basicyear[i];
-    }
-
-    //1월1일 무슨 요일인지 계산
-    k = sum % 7;
-
-    system("cls");
-
-    //출력
-    printf("\n%47d년 %d월\n\n", year, month);
-    printf("SUN\tMON\tTUS\tWED\tTHU\tFRI\tSAT\n");
-    printf("===================================================\n");
-
-    //시작 요일에 맞춰 정렬
-    for (int j = 0; j < k; j++) {
-        printf("\t");
-    }
-
-    for (int i = 1; i <= basicyear[month - 1]; i++) {
-
-        printf("%d\t", i);
-        if (k == 6) {
-            k = -1;
-            printf("\n");
-        }
-        k++;
-    }
-    printf("\n");
-}
-int leapyear(int a) {
-    if ((a % 4 == 0) && !(a % 100 == 0) || (a % 400 == 0)) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-}*/
