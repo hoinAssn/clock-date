@@ -74,12 +74,12 @@ void date(void) {
 	printscreen();
 
     for (int j = 0; j < k; j++) {
-        printf("              ");
+        printf("             ");
     }
 
     for (int i = 1; i <= basicyear[month - 1]; i++) {
 
-        printf("            %d", i);
+        printf("%02d           ", i);
         if (k == 6) {
             k = -1;
             printf("\n");
@@ -100,6 +100,6 @@ int leapyear(int a) {
 
 void printscreen(void) {
 	printf("     ---------------------------------------------------------------------------------------------------     ");
-	printf("     |     SUN\tMON\tTUE\tWED\tTHU\tFRI\tSAT\t");
-	printf("     ---------------------------------------------------------------------------------------------------     \n");
+	printf("     |     SUN     |     MON     |     TUE     |     WED     |     THU     |     FRI     |     SAT     |     ");
+	printf("     ---------------------------------------------------------------------------------------------------     ");
 }
