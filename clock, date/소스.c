@@ -100,6 +100,6 @@ int leapyear(int a) {
 
 void printscreen(void) {
 	printf("     ---------------------------------------------------------------------------------------------     \n");
-	printf("     |     SUN          MON          TUE          WED          THU          FRI          SAT     |     \n");
+	printf("     |     SUN\tMON\tTUE\tWED\tTHU\tFRI\tSAT     |     \n");
 	printf("     ---------------------------------------------------------------------------------------------     \n");
 }
