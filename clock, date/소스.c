@@ -137,7 +137,8 @@ void scdul(void) {
     }
 
     cal[yea - stdyr][mont][day] = new;
-    new=
+    
+    scanf_s("시작할 시간을 입력해주세요\nex)15:17 >> %s", new->srttm, sizeof(new->srttm));
 }
 
 //윤년계산
