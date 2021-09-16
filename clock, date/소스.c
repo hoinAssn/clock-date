@@ -1,4 +1,5 @@
 //헤더파일 선언
+#pragma once //헤더파일 중복 제거
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,7 +25,7 @@ int main() {
         default: printf("잘못입력되었습니다"); break;
 	}
 
-    printf("\n\n1. 일정추가 / 2. 종료");
+    printf("\n\n1. 일정추가 / 2. 종료 >> ");
     scanf_s("%d", &b, sizeof(b));
 
     switch (b) {
@@ -47,7 +48,7 @@ void date(void) {
     int chk = 0, sum = 0, k = 0;
     int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 
-	printf("\n\n몇년 몇월을 볼지 입력해주세요\n\nex)2018 03 >> ");
+	printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2018 03 >> ");
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
 
     if (month > 12 || month < 1 || year < 0) {
@@ -108,11 +109,11 @@ void date(void) {
 void scdul(void) {
     int yea, mont; //사용자 입력 변수
     
-    printf("일정을 추가할 날짜를 입력해주세요\n\nex)2018 03 >> ");
+    printf("\n일정을 추가할 날짜를 입력해주세요\n\nex)2018 03 >> ");
     scanf_s("%d %d", &yea, &mont, sizeof(yea), sizeof(mont));
-
 }
 
+//윤년계산
 int leapyear(int a) {
     if ((a % 4 == 0) && !(a % 100 == 0) || (a % 400 == 0)) {
         return 1;
