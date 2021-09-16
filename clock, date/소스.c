@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <math.h>
 #include <time.h>
+#define stdyr 2021
 #pragma once //헤더파일 중복 제거
 
 //구조체 선언
@@ -31,7 +32,7 @@ int main() {
 	switch (a) {
 		case 1: hour(); break;
 		case 2: date(); break;
-        default: printf("잘못입력되었습니다"); break;
+        default: printf("\n\n잘못입력되었습니다\n"); return 0;
 	}
 
     printf("\n\n1. 일정추가 / 2. 종료 >> ");
@@ -39,8 +40,8 @@ int main() {
 
     switch (b) {
         case 1: scdul(); break;
-        case 2: break;
-        default: printf("잘못입력되었습니다"); break;
+        case 2: return 0;
+        default: printf("\n\n잘못입력되었습니다\n"); return 0;
     }
 
 	return 0;
@@ -117,21 +118,26 @@ void date(void) {
 //일정
 void scdul(void) {
     int yea, mont, day; //사용자 입력 변수
+    plan* new = malloc(sizeof(plan));
+
+    time_t tnow;
+    struct tm* t;
+    time(&tnow);
+    t = (struct tm*)localtime(&tnow);
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
     scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
 
-    plan* new = malloc(sizeof(plan));
-    if (strcmp(cal[yea - 2021][mont][day], NULL) != 0) {
+    system("cls");
+    printf("\n%24d년 %d월 %d일\n", yea, mont, day);
+
+    if (strcmp(cal[yea - stdyr][mont][day], NULL) != 0) {
         printf("이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
 
-    system("cls");
-
-    printf("\n%24d년 %d월 %d일\n", yea, mont, day);
-
-
+    cal[yea - stdyr][mont][day] = new;
+    new=
 }
 
 //윤년계산
