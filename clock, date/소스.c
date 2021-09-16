@@ -106,6 +106,10 @@ void date(void) {
 
 //일정
 void scdul(void) {
+    int yea, mont; //사용자 입력 변수
+    
+    printf("일정을 추가할 날짜를 입력해주세요\n\nex)2018 03 >> ");
+    scanf_s("%d %d", &yea, &mont, sizeof(yea), sizeof(mont));
 
 }
 
