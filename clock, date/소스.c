@@ -49,7 +49,7 @@ void date(void) {
     }
     else
         chk = 0;
-
+    ,,
     sum = 365;
     for (int i = 1; i < year; i++) {
         if (leapyear(i))
