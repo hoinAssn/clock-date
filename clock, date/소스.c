@@ -1,3 +1,4 @@
+//헤더파일 선언
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,28 +6,42 @@
 #include <math.h>
 #include <time.h>
 
+//함수선언
 void hour(void);
 void date(void);
+void scdul(void);
 int leapyear(int);
 
 int main() {
-	int a;
+	int a, b; //사용자 입력 변수
 
-	printf("1. 시계 / 2. 달력 >> ");
+	printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 >> ");
 	scanf_s("%d", &a, sizeof(a));
 
 	switch (a) {
 		case 1: hour(); break;
 		case 2: date(); break;
-		default: break;
+        default: printf("잘못입력되었습니다"); break;
 	}
+
+    printf("\n\n1. 일정추가 / 2. 종료");
+    scanf_s("%d", &b, sizeof(b));
+
+    switch (b) {
+        case 1: scdul(); break;
+        case 2: break;
+        default: printf("잘못입력되었습니다"); break;
+    }
 
 	return 0;
 }
+
+//시계
 void hour(void) {
-	printf("Hello");
+	
 }
 
+//달력
 void date(void) {
     int year, month;
     int chk = 0, sum = 0, k = 0;
@@ -49,7 +64,7 @@ void date(void) {
     }
     else
         chk = 0;
-    ,,
+    
     sum = 365;
     for (int i = 1; i < year; i++) {
         if (leapyear(i))
@@ -87,6 +102,11 @@ void date(void) {
     }
 
     printf("\n");
+}
+
+//일정
+void scdul(void) {
+
 }
 
 int leapyear(int a) {
