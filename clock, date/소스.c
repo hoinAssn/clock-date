@@ -10,8 +10,8 @@
 //구조체 선언
 typedef struct schedule {
     char subj;
-    char srtt;
-    char endt;
+    char srttm;
+    char endtm;
 } plan;
 
 //함수선언
@@ -123,9 +123,9 @@ void scdul(void) {
 
     system("cls");
 
-    printf("\n%24d년 %d월 %d일", yea, mont, day);
+    printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
-    cal[yea][mont][day]
+
 }
 
 //윤년계산
