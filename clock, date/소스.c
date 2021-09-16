@@ -122,8 +122,9 @@ void scdul(void) {
     scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
 
     plan* new = malloc(sizeof(plan));
-    if (strcmp(cal[yea - 2021][mont][day], NULL) == 0) {
-
+    if (strcmp(cal[yea - 2021][mont][day], NULL) != 0) {
+        printf("이미 일정이 있습니다"); //나중에 수정
+        return 0;
     }
 
     system("cls");
