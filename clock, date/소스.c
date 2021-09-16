@@ -1,11 +1,11 @@
 //헤더파일 선언
-#pragma once //헤더파일 중복 제거
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <Windows.h>
 #include <math.h>
 #include <time.h>
+#pragma once //헤더파일 중복 제거
 
 //함수선언
 void hour(void);
@@ -107,10 +107,14 @@ void date(void) {
 
 //일정
 void scdul(void) {
-    int yea, mont; //사용자 입력 변수
+    int yea, mont, day; //사용자 입력 변수
     
-    printf("\n일정을 추가할 날짜를 입력해주세요\n\nex)2018 03 >> ");
-    scanf_s("%d %d", &yea, &mont, sizeof(yea), sizeof(mont));
+    printf("\n일정을 추가할 날짜를 입력해주세요\n\nex)2018 03 07 >> ");
+    scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
+
+    system("cls");
+
+    printf("\n%24d년 %d월 %d일", yea, mont, day);
 }
 
 //윤년계산
