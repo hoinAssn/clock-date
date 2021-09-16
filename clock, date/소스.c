@@ -9,7 +9,9 @@
 
 //구조체 선언
 typedef struct schedule {
-    int a;
+    char subj;
+    char srtt;
+    char endt;
 } plan;
 
 //함수선언
