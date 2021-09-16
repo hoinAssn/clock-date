@@ -113,6 +113,8 @@ void date(void) {
 //일정
 void scdul(void) {
     int yea, mont, day; //사용자 입력 변수
+    plan* cal[10][13][32] = { 0, };
+    plan* new = malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요\n\nex)2018 03 07 >> ");
     scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
@@ -121,7 +123,7 @@ void scdul(void) {
 
     printf("\n%24d년 %d월 %d일", yea, mont, day);
 
-
+    cal[yea][mont][day]
 }
 
 //윤년계산
