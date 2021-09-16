@@ -7,6 +7,11 @@
 #include <time.h>
 #pragma once //헤더파일 중복 제거
 
+//구조체 선언
+typedef struct schedule {
+    int a;
+} plan;
+
 //함수선언
 void hour(void);
 void date(void);
@@ -115,6 +120,8 @@ void scdul(void) {
     system("cls");
 
     printf("\n%24d년 %d월 %d일", yea, mont, day);
+
+
 }
 
 //윤년계산
