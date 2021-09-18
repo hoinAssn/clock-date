@@ -10,9 +10,9 @@
 
 //구조체 선언
 typedef struct schedule {
-    char subj;
-    char srttm;
-    char endtm;
+    char subj[100];
+    char srttm[20];
+    char endtm[20];
 } plan;
 
 //함수선언
@@ -118,6 +118,7 @@ void date(void) {
 //일정
 void scdul(void) {
     int yea, mont, day; //사용자 입력 변수
+    char srttm[20], endtm[20], subj[100]; //사용자 입력 변수
     plan* new = malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
@@ -134,9 +135,9 @@ void scdul(void) {
     cal[yea - stdyr][mont][day] = new;
     
     printf("\n\n일정을 시작할 시간과 끝낼 시간을 입력해주세요\nex)15:17 15:25 >> ");
-    scanf_s("%s %s", new->srttm, new->endtm, sizeof(new->srttm), sizeof(new->endtm));
+    scanf_s("%s %s", srttm, endtm, sizeof(srttm), sizeof(endtm));
     printf("일정 내용을 입력해주세요 >> ");
-    scanf_s("%s", new->subj, sizeof(new->subj));
+    scanf_s("%s", subj, sizeof(subj));
 
     system("cls");
     Sleep(1000);
