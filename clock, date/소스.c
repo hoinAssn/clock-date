@@ -126,15 +126,14 @@ void scdul(void) {
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
-    if (strcmp(cal[yea - stdyr][mont][day], NULL) != 0) { //문제생김
+    if (strcmp(cal[yea - stdyr][mont][day], "NULL") != 0) { //문제생김
         printf("이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
 
     cal[yea - stdyr][mont][day] = new;
     
-    scanf_s("시작할 시간과 끝낼 시간을 입력해주세요\nex)15:17 15:25 >> %s %s"
-        , new->srttm, new->endtm, sizeof(new->srttm), sizeof(new->endtm));
+    scanf_s("시작할 시간과 끝낼 시간을 입력해주세요\nex)15:17 15:25 >> %s %s", new->srttm, new->endtm, sizeof(new->srttm), sizeof(new->endtm));
 }
 
 //윤년계산
