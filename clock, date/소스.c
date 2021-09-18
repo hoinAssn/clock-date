@@ -19,30 +19,22 @@ typedef struct schedule {
 void hour(void);
 void date(void);
 void scdul(void);
+void lkscdul(void);
 int leapyear(int);
 
 plan* cal[10][13][32] = { NULL, };
 
 int main() {
-	int a, b; //사용자 입력 변수
+	int a; //사용자 입력 변수
 
 	printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 >> ");
 	scanf_s("%d", &a, sizeof(a));
 
 	switch (a) {
-		case 1: hour(); return 0;
+		case 1: hour(); break;
 		case 2: date(); break;
-        default: printf("\n\n잘못입력되었습니다\n"); return 0;
+        default: printf("\n\n잘못입력되었습니다\n"); break;
 	}
-
-    printf("\n\n1. 일정추가 / 2. 종료 >> ");
-    scanf_s("%d", &b, sizeof(b));
-
-    switch (b) {
-        case 1: scdul(); break;
-        case 2: return 0;
-        default: printf("\n\n잘못입력되었습니다\n"); return 0;
-    }
 
 	return 0;
 }
@@ -54,8 +46,8 @@ void hour(void) {
 
 //달력
 void date(void) {
-    int year, month;
-    int chk = 0, sum = 0, k = 0;
+    int year, month, b; //사용자 입력변수
+    int chk = 0, sum = 0, k = 0; //저장용 변수
     int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 
 	printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2018 03 >> ");
@@ -113,12 +105,22 @@ void date(void) {
     }
 
     printf("\n");
+
+    printf("\n\n1. 일정추가 / 2. 일정보기 / 3. 종료 >> ");
+    scanf_s("%d", &b, sizeof(b));
+
+    switch (b) {
+        case 1: scdul(); break;
+        case 2: lkscdul();  break;
+        case 3: break;
+        default: printf("\n\n잘못입력되었습니다\n"); break;
+    }
 }
 
-//일정
+//일정추가
 void scdul(void) {
     int yea, mont, day; //사용자 입력 변수
-    char srttm[20], endtm[20], subj[100]; //사용자 입력 변수
+    char subj[100], srttm[20], endtm[20];
     plan* new = malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
@@ -134,10 +136,12 @@ void scdul(void) {
 
     cal[yea - stdyr][mont][day] = new;
     
-    printf("\n\n일정을 시작할 시간과 끝낼 시간을 입력해주세요\nex)15:17 15:25 >> ");
-    scanf_s("%s %s", srttm, endtm, sizeof(srttm), sizeof(endtm));
+    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
+    scanf_s("%s", srttm);
+    printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
+    scanf_s("%s", endtm);
     printf("일정 내용을 입력해주세요 >> ");
-    scanf_s("%s", subj, sizeof(subj));
+    scanf_s("%s", subj);
 
     system("cls");
     Sleep(1000);
@@ -146,6 +150,11 @@ void scdul(void) {
     system("cls");
 
     date();
+}
+
+//일정보기
+void lkscdul(void) {
+    printf("Hi");
 }
 
 //윤년계산
