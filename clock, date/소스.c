@@ -126,7 +126,7 @@ void scdul(void) {
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
-    if (strcmp(cal[yea - stdyr][mont][day], "NULL") != 0) { //문제생김
+    if (cal[yea - stdyr][mont][day] != NULL) { //문제생김
         printf("이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
