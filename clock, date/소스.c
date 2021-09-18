@@ -137,11 +137,11 @@ void scdul(void) {
     cal[yea - stdyr][mont][day] = new;
     
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
-    scanf_s("%s", srttm);
+    scanf_s("%s", new->srttm);
     printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
-    scanf_s("%s", endtm);
+    scanf_s("%s", new->endtm);
     printf("일정 내용을 입력해주세요 >> ");
-    scanf_s("%s", subj);
+    scanf_s("%s", new->subj);
 
     system("cls");
     Sleep(1000);
