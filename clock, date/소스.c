@@ -49,7 +49,7 @@ int main() {
 
 //시계
 void hour(void) {
-	
+    printf("Hello");
 }
 
 //달력
