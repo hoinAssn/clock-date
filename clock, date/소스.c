@@ -30,7 +30,7 @@ int main() {
 	scanf_s("%d", &a, sizeof(a));
 
 	switch (a) {
-		case 1: hour(); break;
+		case 1: hour(); return 0;
 		case 2: date(); break;
         default: printf("\n\n잘못입력되었습니다\n"); return 0;
 	}
@@ -133,7 +133,18 @@ void scdul(void) {
 
     cal[yea - stdyr][mont][day] = new;
     
-    scanf_s("시작할 시간과 끝낼 시간을 입력해주세요\nex)15:17 15:25 >> %s %s", new->srttm, new->endtm, sizeof(new->srttm), sizeof(new->endtm));
+    printf("\n\n일정을 시작할 시간과 끝낼 시간을 입력해주세요\nex)15:17 15:25 >> ");
+    scanf_s("%s %s", new->srttm, new->endtm, sizeof(new->srttm), sizeof(new->endtm));
+    printf("일정 내용을 입력해주세요 >> ");
+    scanf_s("%s", new->subj, sizeof(new->subj));
+
+    system("cls");
+    Sleep(1000);
+    printf("일정 추가 성공!");
+    Sleep(1000);
+    system("cls");
+
+    date();
 }
 
 //윤년계산
