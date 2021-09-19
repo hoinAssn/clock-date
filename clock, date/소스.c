@@ -123,6 +123,7 @@ void date(void) {
 //일정추가
 void scdul(void) {
     int yea, mont, day, a; //사용자 입력 변수
+    char subj[100], srttm[20], endtm[20];
     plan* new = (plan*)malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
@@ -133,13 +134,6 @@ void scdul(void) {
 
     cal[yea - stdyr][mont][day] = new;
 
-    strcat(day, ".txt");
-    strcat(mont, day);
-    strcat(yea, mont);
-
-    FILE* fs;
-    fopen_s(&fs, yea, "w");
-
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
@@ -149,18 +143,11 @@ void scdul(void) {
     }
     
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
-    scanf_s(" %s", new->srttm, sizeof(new->srttm));
+    scanf_s(" %s", srttm, sizeof(srttm));
     printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
-    scanf_s(" %s", new->endtm, sizeof(new->endtm));
+    scanf_s(" %s", endtm, sizeof(endtm));
     printf("일정 내용을 입력해주세요 >> ");
-    scanf_s(" %s", new->subj, sizeof(new->subj));
-
-    strcat(new->srttm, "\n");
-    strcat(new->endtm, "\n");
-
-    fputs(new->srttm, fs);
-    fputs(new->endtm, fs);
-    fputs(new->subj, fs);
+    scanf_s(" %s", subj, sizeof(subj));
 
     system("cls");
     Sleep(1000);
@@ -169,7 +156,6 @@ void scdul(void) {
     system("cls");
 
     free(new);
-    fclose(fs);
 
     printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 / 3. 종료 >> ");
     scanf_s("%d", &a, sizeof(a));
