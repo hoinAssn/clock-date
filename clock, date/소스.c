@@ -27,12 +27,13 @@ plan* cal[10][13][32] = { NULL, };
 int main() {
 	int a; //사용자 입력 변수
 
-	printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 >> ");
+	printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 / 3. 종료 >> ");
 	scanf_s("%d", &a, sizeof(a));
 
 	switch (a) {
 		case 1: hour(); break;
 		case 2: date(); break;
+        case 3: break;
         default: printf("\n\n잘못입력되었습니다\n"); break;
 	}
 
@@ -119,29 +120,32 @@ void date(void) {
 
 //일정추가
 void scdul(void) {
-    int yea, mont, day; //사용자 입력 변수
+    int yea, mont, day, a; //사용자 입력 변수
     char subj[100], srttm[20], endtm[20];
-    plan* new = malloc(sizeof(plan));
+    plan* new = (plan*)malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
     scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
+
+    if (yea < 2021)
+        return 0;
 
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
     if (cal[yea - stdyr][mont][day] != NULL) {
-        printf("이미 일정이 있습니다"); //나중에 수정
+        printf("\n이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
 
     cal[yea - stdyr][mont][day] = new;
     
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
-    scanf_s(" %s", srttm);
+    scanf_s(" %s", new->srttm, sizeof(new->srttm));
     printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
-    scanf_s(" %s", endtm);
+    scanf_s(" %s", new->endtm, sizeof(new->endtm));
     printf("일정 내용을 입력해주세요 >> ");
-    scanf_s(" %s", subj);
+    scanf_s(" %s", new->subj, sizeof(new->subj));
 
     system("cls");
     Sleep(1000);
@@ -149,7 +153,18 @@ void scdul(void) {
     Sleep(1000);
     system("cls");
 
-    date();
+    free(new);
+
+    printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 / 3. 종료 >> ");
+    scanf_s("%d", &a, sizeof(a));
+
+    switch (a) {
+        case 1: hour(); break;
+        case 2: date(); break;
+        case 3: break;
+        default: printf("\n\n잘못입력되었습니다\n"); break;
+    }
+
 }
 
 //일정보기
