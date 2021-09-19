@@ -143,11 +143,11 @@ void scdul(void) {
     }
     
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
-    scanf_s(" %s", srttm, sizeof(srttm));
+    scanf_s(" %s", new->srttm, sizeof(new->srttm));
     printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
-    scanf_s(" %s", endtm, sizeof(endtm));
+    scanf_s(" %s", new->endtm, sizeof(new->endtm));
     printf("일정 내용을 입력해주세요 >> ");
-    scanf_s(" %s", subj, sizeof(subj));
+    scanf_s(" %s", new->subj, sizeof(new->subj));
 
     system("cls");
     Sleep(1000);
