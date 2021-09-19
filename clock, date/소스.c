@@ -49,7 +49,7 @@ void hour(void) {
 void date(void) {
     int year, month, b; //사용자 입력변수
     int chk = 0, sum = 0, k = 0; //저장용 변수
-    int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+    int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 }; //기본 일수
 
 	printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2018 03 >> ");
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
@@ -62,6 +62,7 @@ void date(void) {
         return 0;
     }
 
+    //윤달확인
     if (leapyear(year)) {
         chk = 1;
         basicyear[1]++;
