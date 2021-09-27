@@ -132,8 +132,6 @@ void scdul(void) {
     if (yea < 2021)
         return 0;
 
-    cal[yea - stdyr][mont][day] = new;
-
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
@@ -141,6 +139,8 @@ void scdul(void) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
+
+    cal[yea - stdyr][mont][day] = new;
     
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
     scanf_s(" %s", new->srttm, sizeof(new->srttm));
