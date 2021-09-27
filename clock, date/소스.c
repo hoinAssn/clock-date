@@ -23,6 +23,7 @@ void scdul(void);
 void lkscdul(void);
 int leapyear(int);
 
+//배열 초기화
 plan* cal[10][13][32] = { NULL, };
 
 int main() {
@@ -123,7 +124,7 @@ void date(void) {
 //일정추가
 void scdul(void) {
     int yea, mont, day, a; //사용자 입력 변수
-    char subj[100], srttm[20], endtm[20];
+    char subj[200], srttm[20], endtm[20], subj1[200]; //저장용 변수
     plan* new = (plan*)malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
@@ -135,7 +136,7 @@ void scdul(void) {
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
-    if (cal[yea - stdyr][mont][day] != NULL) { //오류 생김
+    if (cal[yea - stdyr][mont][day] != NULL) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
@@ -148,6 +149,24 @@ void scdul(void) {
     scanf_s(" %s", new->endtm, sizeof(new->endtm));
     printf("일정 내용을 입력해주세요 >> ");
     scanf_s(" %s", new->subj, sizeof(new->subj));
+
+    strcpy(srttm, new->srttm);
+    strcpy(endtm, new->endtm);
+    strcpy(subj, new->subj);
+
+    strcat(subj, srttm);
+    strcat(subj, endtm);
+    strcat(subj1, subj);
+    strcat(subj1, ".txt");
+
+    FILE* fs;
+    fopen_s(&fs, subj1, "w");
+
+    if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
+        fopen_s(&fs, subj1, "w");
+    }
+
+    fputs(subj, fs);
 
     system("cls");
     Sleep(1000);
