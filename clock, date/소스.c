@@ -156,7 +156,7 @@ void scdul(void) {
 
     strcat(subj, srttm);
     strcat(subj, endtm);
-    strcat(subj1, srttm);
+    strcat(subj1, srttm); //subj1에 복사가 안되는듯
     strcat(subj1, endtm);
     strcat(subj1, ".txt");
 
