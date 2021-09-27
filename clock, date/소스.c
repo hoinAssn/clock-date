@@ -156,7 +156,8 @@ void scdul(void) {
 
     strcat(subj, srttm);
     strcat(subj, endtm);
-    strcat(subj1, subj);
+    strcat(subj1, srttm);
+    strcat(subj1, endtm);
     strcat(subj1, ".txt");
 
     FILE* fs;
