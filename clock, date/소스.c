@@ -131,7 +131,7 @@ void scdul(void) {
 
     if (yea < 2021)
         return 0;
-
+    ¤·
     system("cls");
     printf("\n%24d³â %d¿ù %dÀÏ\n", yea, mont, day);
 
