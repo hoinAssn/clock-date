@@ -11,6 +11,7 @@
 
 //구조체 선언
 typedef struct schedule {
+    struct schedule* next;
     char subj[100];
     char srttm[20];
     char endtm[20];
@@ -125,9 +126,9 @@ void date(void) {
 void scdul(void) {
     int yea, mont, day, a; //사용자 입력 변수
     char subj[200], srttm[20], endtm[20]; //저장용 변수
-    char nyan[20] = { 0, };
-    char dal[20] = { 0, };
-    char ill[20] = { 0, };
+    char nyan[20] = { 0, }; //복사용 변수
+    char dal[20] = { 0, }; //복사용 변수
+    char ill[20] = { 0, }; //복사용 변수
     plan* new = (plan*)malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2021 03 07 >> ");
@@ -148,7 +149,7 @@ void scdul(void) {
     FILE* fs;
     fopen_s(&fs, nyan, "r");
 
-    if (fs != NULL) {
+    if (fs != NULL) { //나중에 수정
         printf("\n이미 일정이 있습니다");
         return 0;
     }
