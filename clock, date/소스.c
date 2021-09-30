@@ -53,7 +53,7 @@ void date(void) {
     int chk = 0, sum = 0, k = 0; //저장용 변수
     int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 }; //기본 일수
 
-	printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2018 03 >> ");
+	printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2021 03 >> ");
 	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
 
     if (month > 12 || month < 1 || year < 0) {
@@ -124,10 +124,13 @@ void date(void) {
 //일정추가
 void scdul(void) {
     int yea, mont, day, a; //사용자 입력 변수
-    char subj[200], srttm[20], endtm[20], subj1[200]; //저장용 변수
+    char subj[200], srttm[20], endtm[20]; //저장용 변수
+    char nyan[20] = { 0, };
+    char dal[20] = { 0, };
+    char ill[20] = { 0, };
     plan* new = (plan*)malloc(sizeof(plan));
     
-    printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2018 03 07 >> ");
+    printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2021 03 07 >> ");
     scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
 
     if (yea < 2021)
@@ -136,6 +139,20 @@ void scdul(void) {
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
+    strcat(itoa(yea, nyan, 10), ".");
+    strcat(itoa(yea, nyan, 10), itoa(mont, dal, 10));
+    strcat(itoa(yea, nyan, 10), ".");
+    strcat(itoa(yea, nyan, 10), itoa(day, ill, 10));
+    strcat(itoa(yea, nyan, 10), ".txt");
+
+    FILE* fs;
+    fopen_s(&fs, yea, "r");
+
+    if (fs != NULL) {
+        printf("\n이미 일정이 있습니다");
+        return 0;
+    }
+
     if (cal[yea - stdyr][mont][day] != NULL) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
         return 0;
@@ -143,9 +160,9 @@ void scdul(void) {
 
     cal[yea - stdyr][mont][day] = new;
     
-    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15.17 >> ");
+    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
     scanf_s(" %s", new->srttm, sizeof(new->srttm));
-    printf("일정을 끝낼 시간을 입력해주세요 ex)15.25 >> ");
+    printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
     scanf_s(" %s", new->endtm, sizeof(new->endtm));
     printf("일정 내용을 입력해주세요 >> ");
     scanf_s(" %s", new->subj, sizeof(new->subj));
@@ -154,21 +171,19 @@ void scdul(void) {
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
 
-    strcat(subj, "_");
-    strcat(subj, srttm);
-    strcat(subj, "~");
-    strcat(subj, endtm);
-    strcat(subj, ".txt");
-
-    FILE* fs;
-    fopen_s(&fs, subj, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
+    fopen_s(&fs, yea, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
 
     if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-        fopen_s(&fs, subj, "w");
+        fopen_s(&fs, yea, "w");
     }
+
+    strcat(srttm, "~");
+    strcat(endtm, "\n");
+    strcat(srttm, endtm);
 
     fputs(srttm, fs);
     fputs(endtm, fs);
+    fputs(subj, fs);
     fclose(fs);
     free(new);
 
