@@ -156,12 +156,12 @@ void scdul(void) {
 
     strcat(subj, "_");
     strcat(subj, srttm);
-    strcat(subj, "_");
+    strcat(subj, "~");
     strcat(subj, endtm);
     strcat(subj, ".txt");
 
     FILE* fs;
-    fopen_s(&fs, subj, "w"); //\ / : * ? < > | 사용 불가
+    fopen_s(&fs, subj, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
 
     if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
         fopen_s(&fs, subj, "w");
