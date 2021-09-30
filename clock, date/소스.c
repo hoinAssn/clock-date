@@ -165,6 +165,10 @@ void scdul(void) {
         fopen_s(&fs, subj, "w");
     }
 
+    fputs(srttm, fs);
+    fputs(" ", fs);
+    fputs(endtm, fs);
+
     system("cls");
     Sleep(1000);
     printf("일정 추가 성공!");
