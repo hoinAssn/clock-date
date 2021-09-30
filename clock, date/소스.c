@@ -149,14 +149,16 @@ void scdul(void) {
     FILE* fs;
     fopen_s(&fs, nyan, "r");
 
-    if (fs != NULL) { //나중에 수정
-        struct schedule* head = malloc(sizeof(struct schedule));
+    if (fs != NULL) { //연결 리스트 중
+        char iary[100]; //파일읽기용 변수
 
+        fgets(iary, 100, fs);
+
+        struct schedule* head = malloc(sizeof(struct schedule));
         struct schedule* node1 = malloc(sizeof(struct schedule));
         head->next = node1;
-        node1->
+        node1->srttm = iary;
     }
-
 
     if (cal[yea - stdyr][mont][day] != NULL) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
@@ -172,6 +174,13 @@ void scdul(void) {
     printf("일정 내용을 입력해주세요 >> ");
     scanf_s(" %s", new->subj, sizeof(new->subj));
 
+    /*struct schedule* head = malloc(sizeof(struct schedule));
+    struct schedule* node1 = malloc(sizeof(struct schedule));
+    head->next = node1;
+    node1->srttm = new->srttm;
+    node1->endtm = new->endtm;
+    node1->subj = new->subj;*/
+    
     strcpy(srttm, new->srttm);
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
@@ -182,11 +191,11 @@ void scdul(void) {
         fopen_s(&fs, nyan, "w");
     }
 
-    strcat(srttm, "~");
+    strcat(srttm, "\n");
     strcat(endtm, "\n");
-    strcat(srttm, endtm);
 
     fputs(srttm, fs);
+    fputs(endtm, fs);
     fputs(subj, fs);
     fclose(fs);
     free(new);
