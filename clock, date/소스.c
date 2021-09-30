@@ -140,13 +140,13 @@ void scdul(void) {
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
     strcat(itoa(yea, nyan, 10), ".");
-    strcat(itoa(yea, nyan, 10), itoa(mont, dal, 10));
-    strcat(itoa(yea, nyan, 10), ".");
-    strcat(itoa(yea, nyan, 10), itoa(day, ill, 10));
-    strcat(itoa(yea, nyan, 10), ".txt");
+    strcat(nyan, itoa(mont, dal, 10));
+    strcat(nyan, ".");
+    strcat(nyan, itoa(day, ill, 10));
+    strcat(nyan, ".txt");
 
     FILE* fs;
-    fopen_s(&fs, yea, "r");
+    fopen_s(&fs, nyan, "r");
 
     if (fs != NULL) {
         printf("\n이미 일정이 있습니다");
