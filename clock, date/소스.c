@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <Windows.h>
+#include <windows.h>
 #include <math.h>
 #include <time.h>
 #define stdyr 2021
