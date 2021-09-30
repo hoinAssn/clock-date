@@ -143,9 +143,9 @@ void scdul(void) {
 
     cal[yea - stdyr][mont][day] = new;
     
-    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
+    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15.17 >> ");
     scanf_s(" %s", new->srttm, sizeof(new->srttm));
-    printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
+    printf("일정을 끝낼 시간을 입력해주세요 ex)15.25 >> ");
     scanf_s(" %s", new->endtm, sizeof(new->endtm));
     printf("일정 내용을 입력해주세요 >> ");
     scanf_s(" %s", new->subj, sizeof(new->subj));
@@ -154,15 +154,14 @@ void scdul(void) {
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
 
-    strcat(srttm, " ");
-    strcat(endtm, " ");
-    strcat(subj, " ");
+    strcat(subj, "_");
     strcat(subj, srttm);
+    strcat(subj, "_");
     strcat(subj, endtm);
     strcat(subj, ".txt");
 
     FILE* fs;
-    fopen_s(&fs, subj, "w");
+    fopen_s(&fs, subj, "w"); //\ / : * ? < > | 사용 불가
 
     if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
         fopen_s(&fs, subj, "w");
