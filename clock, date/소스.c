@@ -153,6 +153,7 @@ void scdul(void) {
         return 0;
     }
 
+
     if (cal[yea - stdyr][mont][day] != NULL) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
         return 0;
@@ -171,10 +172,10 @@ void scdul(void) {
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
 
-    fopen_s(&fs, yea, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
+    fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
 
     if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-        fopen_s(&fs, yea, "w");
+        fopen_s(&fs, nyan, "w");
     }
 
     strcat(srttm, "~");
@@ -182,7 +183,6 @@ void scdul(void) {
     strcat(srttm, endtm);
 
     fputs(srttm, fs);
-    fputs(endtm, fs);
     fputs(subj, fs);
     fclose(fs);
     free(new);
