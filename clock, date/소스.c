@@ -154,6 +154,9 @@ void scdul(void) {
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
 
+    strcat(srttm, " ");
+    strcat(endtm, " ");
+    strcat(subj, " ");
     strcat(subj, srttm);
     strcat(subj, endtm);
     strcat(subj, ".txt");
@@ -166,16 +169,15 @@ void scdul(void) {
     }
 
     fputs(srttm, fs);
-    fputs(" ", fs);
     fputs(endtm, fs);
+    fclose(fs);
+    free(new);
 
     system("cls");
     Sleep(1000);
     printf("일정 추가 성공!");
     Sleep(1000);
     system("cls");
-
-    free(new);
 
     printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 / 3. 종료 >> ");
     scanf_s("%d", &a, sizeof(a));
