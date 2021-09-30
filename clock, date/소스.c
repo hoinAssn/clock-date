@@ -156,7 +156,7 @@ void scdul(void) {
 
     strcat(subj, "_");
     strcat(subj, srttm);
-    strcat(subj, "~");s
+    strcat(subj, "~");
     strcat(subj, endtm);
     strcat(subj, ".txt");
 
