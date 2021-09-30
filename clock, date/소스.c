@@ -150,8 +150,11 @@ void scdul(void) {
     fopen_s(&fs, nyan, "r");
 
     if (fs != NULL) { //나중에 수정
-        printf("\n이미 일정이 있습니다");
-        return 0;
+        struct schedule* head = malloc(sizeof(struct schedule));
+
+        struct schedule* node1 = malloc(sizeof(struct schedule));
+        head->next = node1;
+        node1->
     }
 
 
