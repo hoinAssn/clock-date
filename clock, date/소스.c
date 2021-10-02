@@ -150,7 +150,17 @@ void scdul(void) {
     fopen_s(&fs, nyan, "r");
 
     if (fs != NULL) { //연결 리스트 중
+        char e; //사용자 입력 변수
         char iary[100]; //파일읽기용 변수
+        
+        printf("이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
+        scanf_s("%c", e, sizeof(e));
+
+        switch (e) {
+        case 'y': break;
+        case 'n': date(); return 0;
+        default: printf("\n\n잘못입력되었습니다\n"); return 0;
+        }
 
         fgets(iary, 100, fs);
 
