@@ -20,7 +20,7 @@ typedef struct schedule {
 //함수선언
 void date(void);
 void scdul(void);
-void listfirst(plan* List);
+void listfirst(plan* List, char a, char b, char c, char d);
 void lkscdul(void);
 int leapyear(int);
 
@@ -175,11 +175,11 @@ void scdul(void) {
         char* str = strtok(new->srttm, ":");
         NUM = atoi(str);
 
-        if (num < NUM) {
-            struct schedule* newNode = malloc(sizeof(struct schedule));
-            newNode->next = List->next;
+        if (num < NUM)
+            listfirst(plan, new->srttm, new->endtm, new->subj, nyan);
 
-            List->next = newNode;
+        else if (NUM < num) {
+            listfirst(plan, new->srttm, new->endtm, new->subj, nyan);
         }
 
         /*struct schedule* node1 = malloc(sizeof(struct schedule));
@@ -253,11 +253,23 @@ void scdul(void) {
 
 }
 
-void listfirst(plan* List) {
-    struct schedule* newNode = malloc(sizeof(struct schedule));
-    newNode->next = List->next;
+void listfirst(plan* List, char a, char b, char c, char d) {
+    char iary[100];
+
+    FILE* fs;
+    fopen_s(&fs, d, "r");
+    fgets(iary, 100, fs);
+
+    struct schedule* newnode = malloc(sizeof(struct schedule));
+    newnode->next = List->next;
+
+    strcpy(newnode->srttm, iary);
+    fgets(iary, 100, fs);
+    strcpy(newnode->endtm, iary);
+    fgets(iary, 100, fs);
+    strcpy(newnode->subj, iary);
     
-    List->next = newNode;
+    List->next = newnode;
 }
 
 //일정보기
