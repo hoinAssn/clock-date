@@ -164,10 +164,20 @@ void scdul(void) {
 
         fgets(iary, 100, fs);
 
-        struct schedule* head = malloc(sizeof(struct schedule));
+        struct schedule* plan = malloc(sizeof(struct schedule));
+
         struct schedule* node1 = malloc(sizeof(struct schedule));
-        head->next = node1;
-        node1->srttm = iary;
+        plan->next = node1;
+
+        strcpy(node1->srttm, iary);
+        fgets(iary, 100, fs);
+        strcpy(node1->endtm, iary);
+        fgets(iary, 100, fs);
+        strcpy(node1->subj, iary);
+
+        struct schedule* node2 = malloc(sizeof(struct schedule));
+        node1->next = node2;
+        node2->next = NULL;
     }
 
     if (cal[yea - stdyr][mont][day] != NULL) {
