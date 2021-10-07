@@ -18,7 +18,6 @@ typedef struct schedule {
 } plan;
 
 //함수선언
-void hour(void);
 void date(void);
 void scdul(void);
 void lkscdul(void);
@@ -30,22 +29,16 @@ plan* cal[10][13][32] = { NULL, };
 int main() {
 	int a; //사용자 입력 변수
 
-	printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 / 3. 종료 >> ");
+	printf("|| 모드 선택 ||\n1. 달력 / 2. 종료 >> ");
 	scanf_s("%d", &a, sizeof(a));
 
 	switch (a) {
-		case 1: hour(); break;
-		case 2: date(); break;
-        case 3: break;
+		case 1: date(); break;
+        case 2: break;
         default: printf("\n\n잘못입력되었습니다\n"); break;
 	}
 
 	return 0;
-}
-
-//시계
-void hour(void) {
-    printf("Hello");
 }
 
 //달력
@@ -165,8 +158,11 @@ void scdul(void) {
         fgets(iary, 100, fs);
 
         struct schedule* plan = malloc(sizeof(struct schedule));
+        plan->next = NULL;
 
-        struct schedule* node1 = malloc(sizeof(struct schedule));
+
+
+        /*struct schedule* node1 = malloc(sizeof(struct schedule));
         plan->next = node1;
 
         strcpy(node1->srttm, iary);
@@ -177,7 +173,7 @@ void scdul(void) {
 
         struct schedule* node2 = malloc(sizeof(struct schedule));
         node1->next = node2;
-        node2->next = NULL;
+        node2->next = NULL;*/
     }
 
     if (cal[yea - stdyr][mont][day] != NULL) {
@@ -226,13 +222,12 @@ void scdul(void) {
     Sleep(1000);
     system("cls");
 
-    printf("|| 모드 선택 ||\n1. 시계 / 2. 달력 / 3. 종료 >> ");
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 종료 >> ");
     scanf_s("%d", &a, sizeof(a));
 
     switch (a) {
-        case 1: hour(); break;
-        case 2: date(); break;
-        case 3: break;
+        case 1: date(); break;
+        case 2: break;
         default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 
