@@ -177,13 +177,13 @@ void scdul(void) {
         if (num < NUM) {
             char iary[100];
 
-            FILE* fs;
-            fopen_s(&fs, nyan, "r");
-            fgets(iary, 100, fs);
-
             struct schedule* newnode = malloc(sizeof(struct schedule));
             newnode->next = plan->next;
 
+            FILE* fs;
+            fopen_s(&fs, nyan, "r");
+
+            fgets(iary, 100, fs);
             strcpy(newnode->srttm, iary);
             fgets(iary, 100, fs);
             strcpy(newnode->endtm, iary);
@@ -192,20 +192,24 @@ void scdul(void) {
 
             plan->next = newnode;
         }
+        
+        else if (NUM < num) {
+            char iary[100];
+
+            struct schedule* newnode = malloc(sizeof(struct schedule));
+            newnode->next = plan->next;
+
+            strcpy(newnode->srttm, new->srttm);
+            strcpy(newnode->endtm, new->endtm);
+            strcpy(newnode->subj, new->subj);
+
+            plan->next = newnode;
+        }
+
+        else {
+
+        }
     }
-
-        /*struct schedule* node1 = malloc(sizeof(struct schedule));
-        plan->next = node1;
-
-        strcpy(node1->srttm, iary);
-        fgets(iary, 100, fs);
-        strcpy(node1->endtm, iary);
-        fgets(iary, 100, fs);
-        strcpy(node1->subj, iary);
-
-        struct schedule* node2 = malloc(sizeof(struct schedule));
-        node1->next = node2;
-        node2->next = NULL;*/
 
     if (cal[yea - stdyr][mont][day] != NULL) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
@@ -221,13 +225,6 @@ void scdul(void) {
     printf("일정 내용을 입력해주세요 >> ");
     scanf_s(" %s", new->subj, sizeof(new->subj));
 
-    /*struct schedule* head = malloc(sizeof(struct schedule));
-    struct schedule* node1 = malloc(sizeof(struct schedule));
-    head->next = node1;
-    node1->srttm = new->srttm;
-    node1->endtm = new->endtm;
-    node1->subj = new->subj;*/
-    
     strcpy(srttm, new->srttm);
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
