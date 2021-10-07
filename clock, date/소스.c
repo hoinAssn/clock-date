@@ -20,7 +20,6 @@ typedef struct schedule {
 //함수선언
 void date(void);
 void scdul(void);
-void listfirst(plan* List, char a, char b, char c, char d);
 void lkscdul(void);
 int leapyear(int);
 
@@ -175,12 +174,25 @@ void scdul(void) {
         char* str = strtok(new->srttm, ":");
         NUM = atoi(str);
 
-        if (num < NUM)
-            listfirst(plan, new->srttm, new->endtm, new->subj, nyan);
+        if (num < NUM) {
+            char iary[100];
 
-        else if (NUM < num) {
-            listfirst(plan, new->srttm, new->endtm, new->subj, nyan);
+            FILE* fs;
+            fopen_s(&fs, nyan, "r");
+            fgets(iary, 100, fs);
+
+            struct schedule* newnode = malloc(sizeof(struct schedule));
+            newnode->next = plan->next;
+
+            strcpy(newnode->srttm, iary);
+            fgets(iary, 100, fs);
+            strcpy(newnode->endtm, iary);
+            fgets(iary, 100, fs);
+            strcpy(newnode->subj, iary);
+
+            plan->next = newnode;
         }
+    }
 
         /*struct schedule* node1 = malloc(sizeof(struct schedule));
         plan->next = node1;
@@ -194,7 +206,6 @@ void scdul(void) {
         struct schedule* node2 = malloc(sizeof(struct schedule));
         node1->next = node2;
         node2->next = NULL;*/
-    }
 
     if (cal[yea - stdyr][mont][day] != NULL) {
         printf("\n이미 일정이 있습니다"); //나중에 수정
@@ -251,25 +262,6 @@ void scdul(void) {
         default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 
-}
-
-void listfirst(plan* List, char a, char b, char c, char d) {
-    char iary[100];
-
-    FILE* fs;
-    fopen_s(&fs, d, "r");
-    fgets(iary, 100, fs);
-
-    struct schedule* newnode = malloc(sizeof(struct schedule));
-    newnode->next = List->next;
-
-    strcpy(newnode->srttm, iary);
-    fgets(iary, 100, fs);
-    strcpy(newnode->endtm, iary);
-    fgets(iary, 100, fs);
-    strcpy(newnode->subj, iary);
-    
-    List->next = newnode;
 }
 
 //일정보기
