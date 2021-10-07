@@ -30,7 +30,7 @@ int main() {
 	int a; //사용자 입력 변수
 
 	printf("|| 모드 선택 ||\n1. 달력 / 2. 종료 >> ");
-	scanf_s("%d", &a, sizeof(a));
+	scanf_s("%d", &a);
 
 	switch (a) {
 		case 1: date(); break;
@@ -48,7 +48,7 @@ void date(void) {
     int basicyear[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 }; //기본 일수
 
 	printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2021 03 >> ");
-	scanf_s("%d %d", &year, &month, sizeof(year), sizeof(month));
+	scanf_s("%d %d", &year, &month);
 
     if (month > 12 || month < 1 || year < 0) {
         printf("\n입력하신 날짜가 형식에 맞지 않습니다\n다시 입력해주세요");
@@ -105,7 +105,7 @@ void date(void) {
     printf("\n");
 
     printf("\n\n1. 일정추가 / 2. 일정보기 / 3. 종료 >> ");
-    scanf_s("%d", &b, sizeof(b));
+    scanf_s("%d", &b);
 
     switch (b) {
         case 1: scdul(); break;
@@ -125,9 +125,9 @@ void scdul(void) {
     plan* new = (plan*)malloc(sizeof(plan));
     
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2021 03 07 >> ");
-    scanf_s("%d %d %d", &yea, &mont, &day, sizeof(yea), sizeof(mont), sizeof(day));
+    scanf_s(" %d %d %d", &yea, &mont, &day);
 
-    if (yea < 2021)
+    if (yea < stdyr)
         return 0;
     
     system("cls");
@@ -147,8 +147,8 @@ void scdul(void) {
         char e; //사용자 입력 변수
         char iary[100]; //파일읽기용 변수
         
-        printf("이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
-        scanf_s("%c", &e, sizeof(e)); //오류생김haha
+        printf("\n\n이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
+        scanf_s(" %c", &e); //오류생김haha
 
         switch (e) {
         case 'y': break;
@@ -285,7 +285,7 @@ void scdul(void) {
     system("cls");
 
     printf("|| 모드 선택 ||\n1. 달력 / 2. 종료 >> ");
-    scanf_s("%d", &a, sizeof(a));
+    scanf_s("%d", &a);
 
     switch (a) {
         case 1: date(); break;
