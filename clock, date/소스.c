@@ -20,6 +20,7 @@ typedef struct schedule {
 //함수선언
 void date(void);
 void scdul(void);
+void listfirst(plan* List);
 void lkscdul(void);
 int leapyear(int);
 
@@ -152,8 +153,17 @@ void scdul(void) {
         switch (e) {
         case 'y': break;
         case 'n': date(); return 0;
-        default: printf("\n\n잘못입력되었습니다\n"); return 0;
+        default: printf("\n\n잘못입력되었습니다"); return 0;
         }
+
+        cal[yea - stdyr][mont][day] = new;
+
+        printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
+        scanf_s(" %s", new->srttm, sizeof(new->srttm));
+        printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
+        scanf_s(" %s", new->endtm, sizeof(new->endtm));
+        printf("일정 내용을 입력해주세요 >> ");
+        scanf_s(" %s", new->subj, sizeof(new->subj));
 
         fgets(iary, 100, fs);
 
@@ -231,6 +241,13 @@ void scdul(void) {
         default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 
+}
+
+void listfirst(plan* List) {
+    struct schedule* newNode = malloc(sizeof(struct schedule));
+    newNode->next = List->next;
+    
+    List->next = newNode;
 }
 
 //일정보기
