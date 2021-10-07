@@ -148,7 +148,7 @@ void scdul(void) {
         char iary[100]; //파일읽기용 변수
         
         printf("이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
-        scanf_s("%c", e, sizeof(e));
+        scanf_s("%c", &e, sizeof(e)); //오류생김haha
 
         switch (e) {
         case 'y': break;
