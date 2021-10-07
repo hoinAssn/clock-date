@@ -207,7 +207,41 @@ void scdul(void) {
         }
 
         else {
+            ptr = strtok(NULL, ":");
+            num = atoi(ptr);
+            str = strtok(NULL, ":");
+            NUM = atoi(str);
+            if (num < NUM) {
+                char iary[100];
 
+                struct schedule* newnode = malloc(sizeof(struct schedule));
+                newnode->next = plan->next;
+
+                FILE* fs;
+                fopen_s(&fs, nyan, "r");
+
+                fgets(iary, 100, fs);
+                strcpy(newnode->srttm, iary);
+                fgets(iary, 100, fs);
+                strcpy(newnode->endtm, iary);
+                fgets(iary, 100, fs);
+                strcpy(newnode->subj, iary);
+
+                plan->next = newnode;
+            }
+
+            else if (NUM < num) {
+                char iary[100];
+
+                struct schedule* newnode = malloc(sizeof(struct schedule));
+                newnode->next = plan->next;
+
+                strcpy(newnode->srttm, new->srttm);
+                strcpy(newnode->endtm, new->endtm);
+                strcpy(newnode->subj, new->subj);
+
+                plan->next = newnode;
+            }
         }
     }
 
