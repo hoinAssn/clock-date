@@ -239,7 +239,7 @@ void scdul(void) {
                 strcpy(newnode->srttm, new->srttm);
                 strcpy(newnode->endtm, new->endtm);
                 strcpy(newnode->subj, new->subj);
-                s
+                
                 plan->next = newnode;
             }
         }
