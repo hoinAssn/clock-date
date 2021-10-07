@@ -166,17 +166,21 @@ void scdul(void) {
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
 
-        fgets(iary, 100, fs);
-        char* ptr = strtok(iary, ":");
-
-        char* str = strtok(new->srttm, ":");
-
-        if (strcmp(str, ptr))
-
         struct schedule* plan = malloc(sizeof(struct schedule));
         plan->next = NULL;
 
+        fgets(iary, 100, fs);
+        char* ptr = strtok(iary, ":");
+        num = atoi(ptr);
+        char* str = strtok(new->srttm, ":");
+        NUM = atoi(str);
 
+        if (num < NUM) {
+            struct schedule* newNode = malloc(sizeof(struct schedule));
+            newNode->next = List->next;
+
+            List->next = newNode;
+        }
 
         /*struct schedule* node1 = malloc(sizeof(struct schedule));
         plan->next = node1;
