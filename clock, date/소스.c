@@ -148,7 +148,7 @@ void scdul(void) {
         char iary[100]; //파일읽기용 변수
         
         printf("\n\n이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
-        scanf_s(" %c", &e); //오류생김haha
+        scanf_s(" %c", &e);
 
         switch (e) {
         case 'y': break;
@@ -245,7 +245,7 @@ void scdul(void) {
         }
     }
 
-    if (cal[yea - stdyr][mont][day] != NULL) {
+    if (cal[yea - stdyr][mont][day] != NULL) { //여기서 걸림 오류 생김
         printf("\n이미 일정이 있습니다"); //나중에 수정
         return 0;
     }
