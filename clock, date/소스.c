@@ -139,6 +139,13 @@ void scdul(void) {
     strcat(nyan, itoa(day, ill, 10));
     strcat(nyan, ".txt");
 
+    FILE* fs;
+    fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
+
+    if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
+        fopen_s(&fs, nyan, "w");
+    }
+
     cal[yea - stdyr][mont][day] = new;
 
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
@@ -151,13 +158,8 @@ void scdul(void) {
     strcpy(srttm, new->srttm);
     strcpy(endtm, new->endtm);
     strcpy(subj, new->subj);
-
-    FILE* fs;
-    fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
-
-    if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-        fopen_s(&fs, nyan, "w");
-    }
+    strcat(srttm, "\n");
+    strcat(endtm, "\n");
 
     if (fs != NULL) { //연결 리스트 중
         int num = 0, NUM = 0; //저장용 변수
@@ -258,9 +260,6 @@ void scdul(void) {
             }
         }
     }
-
-    strcat(srttm, "\n");
-    strcat(endtm, "\n");
 
     fputs(srttm, fs);
     fputs(endtm, fs);
