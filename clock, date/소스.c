@@ -139,13 +139,33 @@ void scdul(void) {
     strcat(nyan, itoa(day, ill, 10));
     strcat(nyan, ".txt");
 
+    cal[yea - stdyr][mont][day] = new;
+
+    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
+    scanf_s(" %s", new->srttm, sizeof(new->srttm));
+    printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
+    scanf_s(" %s", new->endtm, sizeof(new->endtm));
+    printf("일정 내용을 입력해주세요 >> ");
+    scanf_s(" %s", new->subj, sizeof(new->subj));
+
+    strcpy(srttm, new->srttm);
+    strcpy(endtm, new->endtm);
+    strcpy(subj, new->subj);
+
     FILE* fs;
-    fopen_s(&fs, nyan, "r");
+    fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
+
+    if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
+        fopen_s(&fs, nyan, "w");
+    }
 
     if (fs != NULL) { //연결 리스트 중
         int num = 0, NUM = 0; //저장용 변수
         char e; //사용자 입력 변수
         char iary[100]; //파일읽기용 변수
+
+        FILE* fs;
+        fopen_s(&fs, nyan, "r");
         
         printf("\n\n이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
         scanf_s(" %c", &e);
@@ -179,9 +199,6 @@ void scdul(void) {
 
             struct schedule* newnode = malloc(sizeof(struct schedule));
             newnode->next = plan->next;
-
-            FILE* fs;
-            fopen_s(&fs, nyan, "r");
 
             fgets(iary, 100, fs);
             strcpy(newnode->srttm, iary);
@@ -217,9 +234,6 @@ void scdul(void) {
                 struct schedule* newnode = malloc(sizeof(struct schedule));
                 newnode->next = plan->next;
 
-                FILE* fs;
-                fopen_s(&fs, nyan, "r");
-
                 fgets(iary, 100, fs);
                 strcpy(newnode->srttm, iary);
                 fgets(iary, 100, fs);
@@ -243,25 +257,6 @@ void scdul(void) {
                 plan->next = newnode;
             }
         }
-    }
-
-    cal[yea - stdyr][mont][day] = new;
-    
-    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
-    scanf_s(" %s", new->srttm, sizeof(new->srttm));
-    printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
-    scanf_s(" %s", new->endtm, sizeof(new->endtm));
-    printf("일정 내용을 입력해주세요 >> ");
-    scanf_s(" %s", new->subj, sizeof(new->subj));
-
-    strcpy(srttm, new->srttm);
-    strcpy(endtm, new->endtm);
-    strcpy(subj, new->subj);
-
-    fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
-
-    if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-        fopen_s(&fs, nyan, "w");
     }
 
     strcat(srttm, "\n");
