@@ -245,11 +245,6 @@ void scdul(void) {
         }
     }
 
-    if (cal[yea - stdyr][mont][day] != NULL) { //여기서 걸림 오류 생김
-        printf("\n이미 일정이 있습니다"); //나중에 수정
-        return 0;
-    }
-
     cal[yea - stdyr][mont][day] = new;
     
     printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
