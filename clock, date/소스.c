@@ -20,7 +20,7 @@ typedef struct schedule {
 //함수선언
 void date(void);
 void scdul(void);
-void lkscdul(void);
+void dlscdul(void);
 int leapyear(int);
 
 //배열 초기화
@@ -104,7 +104,7 @@ void date(void) {
 
     printf("\n");
 
-    printf("\n\n1. 일정추가 / 2. 일정보기 / 3. 종료 >> ");
+    printf("\n\n1. 일정추가 / 2. 일정삭제 / 3. 종료 >> ");
     scanf_s("%d", &b);
 
     switch (b) {
@@ -123,6 +123,7 @@ void scdul(void) {
     char dal[20] = { 0, }; //복사용 변수
     char ill[20] = { 0, }; //복사용 변수
     plan* new = (plan*)malloc(sizeof(plan));
+    new->next = NULL;
 
     printf("\n일정을 추가할 날짜를 입력해주세요(2021년부터)\n\nex)2021 03 07 >> ");
     scanf_s(" %d %d %d", &yea, &mont, &day);
@@ -165,81 +166,25 @@ void scdul(void) {
 
         struct schedule* curr = cal[yea - stdyr][mont][day];
         while (curr != NULL) {
-            
-        }
 
-        /*struct schedule* plan = malloc(sizeof(struct schedule));
-        plan->next = NULL;
+            if (curr->next != NULL) {
+                char* ptr = strtok(curr->next->srttm, ":");
+                num = atoi(ptr); //저장 내용
+                char* str = strtok(new->srttm, ":");
+                NUM = atoi(str); //입력 받은 내용
 
-        fgets(iary, 100, fs);
-        char* ptr = strtok(iary, ":");
-        num = atoi(ptr); //메모장 저장 내용
-        char* str = strtok(new->srttm, ":");
-        NUM = atoi(str); //입력 받은 내용
+                if (num < NUM)
+                    curr = curr->next;
 
-        if (num < NUM) {
-            char iary[100];
-
-            struct schedule* newnode = malloc(sizeof(struct schedule));
-            newnode->next = plan->next;
-
-            fgets(iary, 100, fs);
-            strcpy(newnode->srttm, iary);
-            fgets(iary, 100, fs);
-            strcpy(newnode->endtm, iary);
-            fgets(iary, 100, fs);
-            strcpy(newnode->subj, iary);
-
-            plan->next = newnode;
-        }
-
-        else if (NUM < num) {
-            char iary[100];
-
-            struct schedule* newnode = malloc(sizeof(struct schedule));
-            newnode->next = plan->next;
-
-            strcpy(newnode->srttm, new->srttm);
-            strcpy(newnode->endtm, new->endtm);
-            strcpy(newnode->subj, new->subj);
-
-            plan->next = newnode;
-        }
-
-        else {
-            ptr = strtok(NULL, ":");
-            num = atoi(ptr);
-            str = strtok(NULL, ":");
-            NUM = atoi(str);
-            if (num < NUM) {
-                char iary[100];
-
-                struct schedule* newnode = malloc(sizeof(struct schedule));
-                newnode->next = plan->next;
-
-                fgets(iary, 100, fs);
-                strcpy(newnode->srttm, iary);
-                fgets(iary, 100, fs);
-                strcpy(newnode->endtm, iary);
-                fgets(iary, 100, fs);
-                strcpy(newnode->subj, iary);
-
-                plan->next = newnode;
+                else {
+                    new->next = curr->next;
+                    curr->next = new;
+                }
             }
 
-            else if (NUM < num) {
-                char iary[100];
-
-                struct schedule* newnode = malloc(sizeof(struct schedule));
-                newnode->next = plan->next;
-
-                strcpy(newnode->srttm, new->srttm);
-                strcpy(newnode->endtm, new->endtm);
-                strcpy(newnode->subj, new->subj);
-
-                plan->next = newnode;
-            }
-        }*/
+            else
+                curr->next = new;
+        }
     }
 
     else {
@@ -278,20 +223,21 @@ void scdul(void) {
         system("cls");
     }
 
-    printf("|| 모드 선택 ||\n1. 달력 / 2. 종료 >> ");
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 종료 >> ");
     scanf_s("%d", &a);
 
     switch (a) {
     case 1: date(); break;
-    case 2: break;
+    case 2: dlscdul(); break;
+    case 3: break;
     default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 
 }
 
-//일정보기
-void lkscdul(void) {
-    printf("Hi");
+//일정삭제
+void dlscdul(void) {
+    
 }
 
 //윤년계산
