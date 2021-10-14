@@ -179,6 +179,7 @@ void scdul(void) {
                 else {
                     new->next = curr->next;
                     curr->next = new;
+                    break;
                 }
             }
 
