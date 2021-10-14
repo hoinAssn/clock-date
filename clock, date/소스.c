@@ -239,7 +239,45 @@ void scdul(void) {
 
 //일정삭제
 void dlscdul(void) {
-    
+    int yea, mont, day;
+    int num = 0, NUM = 0; //저장용 변수
+    char subj[200];
+    plan* new = (plan*)malloc(sizeof(plan));
+    new->next = NULL;
+
+    printf("\n일정을 삭제할 날짜를 입력해주세요(2021년부터)\n\nex)2021 03 07 >> ");
+    scanf_s(" %d %d %d", &yea, &mont, &day);
+
+    if (cal[yea - stdyr][mont][day] == NULL) {
+        printf("일정이 없어 삭제할 수 없습니다");
+        return 0;
+    }
+
+    printf("삭제할 일정의 내용을 입력해주세요 >> ");
+    scanf_s(" %s", subj, sizeof(subj));
+
+    struct schedule* curr = cal[yea - stdyr][mont][day];
+    while (curr != NULL) {
+
+        if (curr->next != NULL) {
+
+            if (strcmp(curr->subj, subj) != 0)
+                curr = curr->next;
+
+            else {
+                struct schedule* removeNode = curr->next;
+                curr->next = removeNode->next;
+
+                free(removeNode);
+                break;
+            }
+        }
+
+        else {
+            curr->next = new;
+            break;
+        }
+    }
 }
 
 //윤년계산
