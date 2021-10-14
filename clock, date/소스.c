@@ -21,6 +21,7 @@ typedef struct schedule {
 void date(void);
 void scdul(void);
 void dlscdul(void);
+void lkscdul(void);
 int leapyear(int);
 
 //배열 초기화
@@ -104,13 +105,14 @@ void date(void) {
 
     printf("\n");
 
-    printf("\n\n1. 일정추가 / 2. 일정삭제 / 3. 종료 >> ");
+    printf("\n\n1. 일정추가 / 2. 일정삭제 / 3. 일정보기 / 4. 종료 >> ");
     scanf_s("%d", &b);
 
     switch (b) {
     case 1: scdul(); break;
     case 2: dlscdul();  break;
-    case 3: break;
+    case 3: lkscdul(); break;
+    case 4: break;
     default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 }
@@ -225,13 +227,14 @@ void scdul(void) {
     printf("일정 추가 성공!");
     Sleep(1000);
     system("cls");
-    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 종료 >> ");
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 일정보기 / 4. 종료 >> ");
     scanf_s("%d", &a);
 
     switch (a) {
     case 1: date(); break;
     case 2: dlscdul(); break;
-    case 3: break;
+    case 3: lkscdul(); break;
+    case 4: break;
     default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 
@@ -239,9 +242,9 @@ void scdul(void) {
 
 //일정삭제
 void dlscdul(void) {
-    int yea, mont, day;
+    int yea, mont, day, a; //사용자 입력 변수
     int num = 0, NUM = 0; //저장용 변수
-    char subj[200];
+    char subj[200]; //사용자 입력 변수
     plan* new = (plan*)malloc(sizeof(plan));
     new->next = NULL;
 
@@ -276,6 +279,43 @@ void dlscdul(void) {
         else {
             curr->next = new;
             break;
+        }
+    }
+
+    system("cls");
+    Sleep(1000);
+    printf("일정 삭제 성공!");
+    Sleep(1000);
+    system("cls");
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 일정보기 / 4. 종료 >> ");
+    scanf_s("%d", &a);
+
+    switch (a) {
+    case 1: date(); break;
+    case 2: dlscdul(); break;
+    case 3: lkscdul(); break;
+    case 4: break;
+    default: printf("\n\n잘못입력되었습니다\n"); break;
+    }
+}
+
+//일정보기
+void lkscdul(void) {
+
+    for (int i = 0; i < 10; i++) {
+        for (int j = 1; j <= 12; j++) {
+            for (int k = 1; k <= 31; k++) {
+
+                struct schedule* curr = cal[i][j][k];
+                while (curr != NULL) {
+
+                    if (curr->next != NULL)
+                        printf("%s\n%s\n%s\n\n", curr->srttm, curr->endtm, curr->subj);
+
+                    else
+                        break;
+                }
+            }
         }
     }
 }
