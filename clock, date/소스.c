@@ -142,7 +142,7 @@ void scdul(void) {
     FILE* fs;
     fopen_s(&fs, nyan, "r");
 
-    if (fs != NULL) { //연결 리스트 중
+    if (cal[yea - stdyr][mont][day] != NULL) { //연결 리스트 중
         int num = 0, NUM = 0; //저장용 변수
         char e; //사용자 입력 변수
         char iary[100]; //파일읽기용 변수
@@ -156,8 +156,6 @@ void scdul(void) {
         default: printf("\n\n잘못입력되었습니다"); return 0;
         }
 
-        cal[yea - stdyr][mont][day] = new;
-
         printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
         scanf_s(" %s", new->srttm, sizeof(new->srttm));
         printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
@@ -165,7 +163,12 @@ void scdul(void) {
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
 
-        struct schedule* plan = malloc(sizeof(struct schedule));
+        struct schedule* curr = cal[yea - stdyr][mont][day];
+        while (curr != NULL) {
+            
+        }
+
+        /*struct schedule* plan = malloc(sizeof(struct schedule));
         plan->next = NULL;
 
         fgets(iary, 100, fs);
@@ -176,13 +179,6 @@ void scdul(void) {
 
         if (num < NUM) {
             char iary[100];
-
-            FILE* fs;
-            fopen_s(&fs, nyan, "w");
-
-            if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-                fopen_s(&fs, nyan, "w");
-            }
 
             struct schedule* newnode = malloc(sizeof(struct schedule));
             newnode->next = plan->next;
@@ -243,42 +239,44 @@ void scdul(void) {
 
                 plan->next = newnode;
             }
+        }*/
+    }
+
+    else {
+        cal[yea - stdyr][mont][day] = new;
+
+        printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
+        scanf_s(" %s", new->srttm, sizeof(new->srttm));
+        printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
+        scanf_s(" %s", new->endtm, sizeof(new->endtm));
+        printf("일정 내용을 입력해주세요 >> ");
+        scanf_s(" %s", new->subj, sizeof(new->subj));
+
+        strcpy(srttm, new->srttm);
+        strcpy(endtm, new->endtm);
+        strcpy(subj, new->subj);
+
+        fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
+
+        if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
+            fopen_s(&fs, nyan, "w");
         }
+
+        strcat(srttm, "\n");
+        strcat(endtm, "\n");
+
+        fputs(srttm, fs);
+        fputs(endtm, fs);
+        fputs(subj, fs);
+        fclose(fs);
+        free(new);
+
+        system("cls");
+        Sleep(1000);
+        printf("일정 추가 성공!");
+        Sleep(1000);
+        system("cls");
     }
-
-    cal[yea - stdyr][mont][day] = new;
-
-    printf("\n\n일정을 시작할 시간을 입력해주세요 ex)15:17 >> ");
-    scanf_s(" %s", new->srttm, sizeof(new->srttm));
-    printf("일정을 끝낼 시간을 입력해주세요 ex)15:25 >> ");
-    scanf_s(" %s", new->endtm, sizeof(new->endtm));
-    printf("일정 내용을 입력해주세요 >> ");
-    scanf_s(" %s", new->subj, sizeof(new->subj));
-
-    strcpy(srttm, new->srttm);
-    strcpy(endtm, new->endtm);
-    strcpy(subj, new->subj);
-
-    fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
-
-    if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-        fopen_s(&fs, nyan, "w");
-    }
-
-    strcat(srttm, "\n");
-    strcat(endtm, "\n");
-
-    fputs(srttm, fs);
-    fputs(endtm, fs);
-    fputs(subj, fs);
-    fclose(fs);
-    free(new);
-
-    system("cls");
-    Sleep(1000);
-    printf("일정 추가 성공!");
-    Sleep(1000);
-    system("cls");
 
     printf("|| 모드 선택 ||\n1. 달력 / 2. 종료 >> ");
     scanf_s("%d", &a);
