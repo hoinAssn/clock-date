@@ -170,12 +170,19 @@ void scdul(void) {
 
         fgets(iary, 100, fs);
         char* ptr = strtok(iary, ":");
-        num = atoi(ptr);
+        num = atoi(ptr); //메모장 저장 내용
         char* str = strtok(new->srttm, ":");
-        NUM = atoi(str);
+        NUM = atoi(str); //입력 받은 내용
 
         if (num < NUM) {
             char iary[100];
+
+            FILE* fs;
+            fopen_s(&fs, nyan, "w");
+
+            if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
+                fopen_s(&fs, nyan, "w");
+            }
 
             struct schedule* newnode = malloc(sizeof(struct schedule));
             newnode->next = plan->next;
