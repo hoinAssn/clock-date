@@ -109,7 +109,7 @@ void date(void) {
 
     switch (b) {
     case 1: scdul(); break;
-    case 2: lkscdul();  break;
+    case 2: dlscdul();  break;
     case 3: break;
     default: printf("\n\n잘못입력되었습니다\n"); break;
     }
