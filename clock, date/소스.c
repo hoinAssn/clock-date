@@ -218,14 +218,13 @@ void scdul(void) {
         fputs(subj, fs);
         fclose(fs);
         free(new);
-
-        system("cls");
-        Sleep(1000);
-        printf("일정 추가 성공!");
-        Sleep(1000);
-        system("cls");
     }
 
+    system("cls");
+    Sleep(1000);
+    printf("일정 추가 성공!");
+    Sleep(1000);
+    system("cls");
     printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 종료 >> ");
     scanf_s("%d", &a);
 
