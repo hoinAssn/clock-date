@@ -182,8 +182,10 @@ void scdul(void) {
                 }
             }
 
-            else
+            else {
                 curr->next = new;
+                break;
+            }
         }
     }
 
