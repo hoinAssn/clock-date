@@ -199,10 +199,12 @@ void scdul(void) {
         scanf_s(" %s", new->endtm, sizeof(new->endtm));
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
+
+        printf("추가 내용 : %s", cal[yea - stdyr][mont][day]->subj);
     }
 
+    Sleep(3000);
     system("cls");
-    Sleep(1000);
     printf("일정 추가 성공!");
     Sleep(1000);
     system("cls");
@@ -239,11 +241,12 @@ void dlscdul(void) { //오류
     scanf_s(" %s", subj, sizeof(subj));
 
     struct schedule* curr = cal[yea - stdyr][mont][day];
+
     while (curr != NULL) {
 
         if (curr->next != NULL) {
 
-            if (strcmp(curr->subj, subj) != 0)
+            if (strcmp(curr->next->subj, subj) != 0)
                 curr = curr->next;
 
             else {
@@ -256,7 +259,7 @@ void dlscdul(void) { //오류
         }
 
         else {
-            curr->next = new;
+            printf("삭제할 맞는 일정이 없습니다");
             break;
         }
     }
