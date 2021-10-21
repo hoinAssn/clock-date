@@ -164,6 +164,10 @@ void scdul(void) {
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
 
+        printf("\n추가 내용 : %s\n", new->srttm);
+        printf("추가 내용 : %s\n", new->endtm);
+        printf("추가 내용 : %s", new->subj);
+
         struct schedule* curr = cal[yea - stdyr][mont][day];
         while (curr != NULL) {
 
@@ -295,6 +299,8 @@ void dlscdul(void) {
 
 //일정보기
 void lkscdul(void) { //오류
+    int a; //사용자 입력 변수
+    char b; //사용자 입력 변수
 
     for (int i = 0; i < 10; i++) {
         for (int j = 1; j <= 12; j++) {
@@ -302,11 +308,28 @@ void lkscdul(void) { //오류
 
                 struct schedule* curr = cal[i][j][k];
                 while (curr != NULL) {
-                    printf("%s\n%s\n%s\n\n", curr->srttm, curr->endtm, curr->subj);
+                    printf("\n%s\n%s\n%s\n", curr->srttm, curr->endtm, curr->subj);
                     curr = curr->next;
                 }
             }
         }
+    }
+
+    printf("아무 키나 입력하시면 넘어갑니다 >> ");
+    scanf_s(" %s", b, sizeof(b));
+    Sleep(1000);
+    system("cls");
+
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정추가 / 3. 일정삭제 / 4. 일정보기 / 5. 종료 >> ");
+    scanf_s("%d", &a);
+
+    switch (a) {
+    case 1: date(); break;
+    case 2: scdul(); break;
+    case 3: dlscdul(); break;
+    case 4: lkscdul(); break;
+    case 5: break;
+    default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 }
 
