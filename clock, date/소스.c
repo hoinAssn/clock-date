@@ -200,29 +200,29 @@ void scdul(void) {
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
 
+        printf("\n추가 내용 : %s\n", cal[yea - stdyr][mont][day]->srttm);
+        printf("추가 내용 : %s\n", cal[yea - stdyr][mont][day]->endtm);
         printf("추가 내용 : %s", cal[yea - stdyr][mont][day]->subj);
     }
 
-    Sleep(3000);
+    Sleep(2000);
     system("cls");
-    printf("일정 추가 성공!");
-    Sleep(1000);
-    system("cls");
-    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 일정보기 / 4. 종료 >> ");
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정추가 / 3. 일정삭제 / 4. 일정보기 / 5. 종료 >> ");
     scanf_s("%d", &a);
 
     switch (a) {
     case 1: date(); break;
-    case 2: dlscdul(); break;
-    case 3: lkscdul(); break;
-    case 4: break;
+    case 2: scdul(); break;
+    case 3: dlscdul(); break;
+    case 4: lkscdul(); break;
+    case 5: break;
     default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 
 }
 
 //일정삭제
-void dlscdul(void) { //오류
+void dlscdul(void) {
     int yea, mont, day, a; //사용자 입력 변수
     int num = 0, NUM = 0; //저장용 변수
     char subj[200]; //사용자 입력 변수
@@ -234,6 +234,7 @@ void dlscdul(void) { //오류
 
     if (cal[yea - stdyr][mont][day] == NULL) {
         printf("\n\n일정이 없어 삭제할 수 없습니다\n");
+        date();
         return 0;
     }
 
@@ -249,41 +250,45 @@ void dlscdul(void) { //오류
         free(removeNode);
     }
 
-    while (curr != NULL) {
+    else {
+        while (curr != NULL) {
 
-        if (curr->next != NULL) {
+            if (curr->next != NULL) {
 
-            if (strcmp(curr->next->subj, subj) != 0)
-                curr = curr->next;
+                if (strcmp(curr->next->subj, subj) != 0)
+                    curr = curr->next;
+
+                else {
+                    struct schedule* removeNode = curr->next;
+                    curr->next = removeNode->next;
+
+                    free(removeNode);
+                    break;
+                }
+            }
 
             else {
-                struct schedule* removeNode = curr->next;
-                curr->next = removeNode->next; 
-
-                free(removeNode);
-                break;
+                printf("삭제할 맞는 일정이 없습니다");
+                date();
+                return 0;
             }
-        }
-
-        else {
-            printf("삭제할 맞는 일정이 없습니다");
-            break;
         }
     }
 
     system("cls");
     Sleep(1000);
     printf("일정 삭제 성공!");
-    Sleep(1000);
+    Sleep(1500);
     system("cls");
-    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정삭제 / 3. 일정보기 / 4. 종료 >> ");
+    printf("|| 모드 선택 ||\n1. 달력 / 2. 일정추가 / 3. 일정삭제 / 4. 일정보기 / 5. 종료 >> ");
     scanf_s("%d", &a);
 
     switch (a) {
     case 1: date(); break;
-    case 2: dlscdul(); break;
-    case 3: lkscdul(); break;
-    case 4: break;
+    case 2: scdul(); break;
+    case 3: dlscdul(); break;
+    case 4: lkscdul(); break;
+    case 5: break;
     default: printf("\n\n잘못입력되었습니다\n"); break;
     }
 }
@@ -297,12 +302,8 @@ void lkscdul(void) { //오류
 
                 struct schedule* curr = cal[i][j][k];
                 while (curr != NULL) {
-
-                    if (curr->next != NULL)
-                        printf("%s\n%s\n%s\n\n", curr->srttm, curr->endtm, curr->subj);
-
-                    else
-                        break;
+                    printf("%s\n%s\n%s\n\n", curr->srttm, curr->endtm, curr->subj);
+                    curr = curr->next;
                 }
             }
         }
