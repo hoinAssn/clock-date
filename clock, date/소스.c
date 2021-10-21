@@ -142,9 +142,6 @@ void scdul(void) {
     strcat(nyan, itoa(day, ill, 10));
     strcat(nyan, ".txt");
 
-    FILE* fs;
-    fopen_s(&fs, nyan, "r");
-
     if (cal[yea - stdyr][mont][day] != NULL) { //연결 리스트 중
         int num = 0, NUM = 0; //저장용 변수
         char e; //사용자 입력 변수
@@ -202,23 +199,6 @@ void scdul(void) {
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
 
-        strcpy(srttm, new->srttm);
-        strcpy(endtm, new->endtm);
-        strcpy(subj, new->subj);
-
-        fopen_s(&fs, nyan, "w"); //파일 이름에 \ / : * ? < > | 사용 불가
-
-        if (fs == NULL) { //fs가 NULL이면 쓰기모드로 파일을 제작
-            fopen_s(&fs, nyan, "w");
-        }
-
-        strcat(srttm, "\n");
-        strcat(endtm, "\n");
-
-        fputs(srttm, fs);
-        fputs(endtm, fs);
-        fputs(subj, fs);
-        fclose(fs);
         free(new);
     }
 
@@ -241,7 +221,7 @@ void scdul(void) {
 }
 
 //일정삭제
-void dlscdul(void) {
+void dlscdul(void) { //오류
     int yea, mont, day, a; //사용자 입력 변수
     int num = 0, NUM = 0; //저장용 변수
     char subj[200]; //사용자 입력 변수
@@ -252,7 +232,7 @@ void dlscdul(void) {
     scanf_s(" %d %d %d", &yea, &mont, &day);
 
     if (cal[yea - stdyr][mont][day] == NULL) {
-        printf("일정이 없어 삭제할 수 없습니다");
+        printf("\n\n일정이 없어 삭제할 수 없습니다\n");
         return 0;
     }
 
@@ -300,7 +280,7 @@ void dlscdul(void) {
 }
 
 //일정보기
-void lkscdul(void) {
+void lkscdul(void) { //오류
 
     for (int i = 0; i < 10; i++) {
         for (int j = 1; j <= 12; j++) {
