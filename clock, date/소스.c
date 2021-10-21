@@ -300,7 +300,7 @@ void dlscdul(void) {
 //일정보기
 void lkscdul(void) { //오류
     int a; //사용자 입력 변수
-    char b; //사용자 입력 변수
+    char b[100]; //사용자 입력 변수
 
     for (int i = 0; i < 10; i++) {
         for (int j = 1; j <= 12; j++) {
@@ -315,7 +315,7 @@ void lkscdul(void) { //오류
         }
     }
 
-    printf("아무 키나 입력하시면 넘어갑니다 >> ");
+    printf("\n아무 키나 입력하시면 넘어갑니다 >> ");
     scanf_s(" %s", b, sizeof(b));
     Sleep(1000);
     system("cls");
