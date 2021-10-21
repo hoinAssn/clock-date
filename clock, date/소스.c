@@ -242,6 +242,13 @@ void dlscdul(void) { //오류
 
     struct schedule* curr = cal[yea - stdyr][mont][day];
 
+    if (strcmp(curr->subj, subj) == 0) {
+        struct schedule* removeNode = curr;
+        curr = removeNode->next;
+
+        free(removeNode);
+    }
+
     while (curr != NULL) {
 
         if (curr->next != NULL) {
@@ -251,7 +258,7 @@ void dlscdul(void) { //오류
 
             else {
                 struct schedule* removeNode = curr->next;
-                curr->next = removeNode->next;
+                curr->next = removeNode->next; 
 
                 free(removeNode);
                 break;
