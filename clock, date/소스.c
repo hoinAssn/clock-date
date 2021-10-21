@@ -244,7 +244,7 @@ void dlscdul(void) { //¿À·ù
 
     if (strcmp(curr->subj, subj) == 0) {
         struct schedule* removeNode = curr;
-        curr = removeNode->next;
+        cal[yea - stdyr][mont][day] = removeNode->next;
 
         free(removeNode);
     }
