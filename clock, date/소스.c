@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <math.h>
 #include <time.h>
-#define stdyr 2021
+#define stdyr 2021 //stdyr=2021
 #define _CRT_SECURE_NO_WARNINGS
 #pragma once //헤더파일 중복 제거
 
@@ -51,7 +51,7 @@ void date(void) {
     printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2021 03 >> ");
     scanf_s("%d %d", &year, &month);
 
-    //입력 날짜가 있는지 확인
+    //입력 날짜가 이상한지 아닌지 확인
     if (month > 12 || month < 1 || year < 0) {
         printf("\n입력하신 날짜가 형식에 맞지 않습니다\n다시 입력해주세요");
         Sleep(3000);
@@ -68,6 +68,7 @@ void date(void) {
     else
         chk = 0;
 
+    //0년부터 작년까지 며칠인지 계산
     sum = 365;
     for (int i = 1; i < year; i++) {
         if (leapyear(i))
@@ -76,10 +77,12 @@ void date(void) {
             sum += 365;
     }
 
+    //입력한 달까지 며칠인지 계산
     for (int i = 0; i < month - 1; i++) {
         sum += basicyear[i];
     }
 
+    //1월1일 무슨 요일인지 계산
     k = sum % 7;
 
     Sleep(500);
@@ -90,6 +93,7 @@ void date(void) {
     printf("SUN\tMON\tTUS\tWED\tTHU\tFRI\tSAT\n");
     printf("===================================================\n");
 
+    //시작 요일에 맞춰 정렬
     for (int j = 0; j < k; j++) {
         printf("\t");
     }
@@ -137,12 +141,7 @@ void scdul(void) {
     system("cls");
     printf("\n%24d년 %d월 %d일\n", yea, mont, day);
 
-    strcat(itoa(yea, nyan, 10), ".");
-    strcat(nyan, itoa(mont, dal, 10));
-    strcat(nyan, ".");
-    strcat(nyan, itoa(day, ill, 10));
-    strcat(nyan, ".txt");
-
+    //이미 일정이 있을경우
     if (cal[yea - stdyr][mont][day] != NULL) {
         int num = 0, NUM = 0; //저장용 변수
         char e; //사용자 입력 변수
@@ -164,10 +163,12 @@ void scdul(void) {
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
 
+        //추가 완료 확인
         printf("\n추가 내용 : %s\n", new->srttm);
         printf("추가 내용 : %s\n", new->endtm);
         printf("추가 내용 : %s", new->subj);
 
+        //시간순으로 다시 배열
         struct schedule* curr = cal[yea - stdyr][mont][day];
         while (curr != NULL) {
 
@@ -194,6 +195,7 @@ void scdul(void) {
         }
     }
 
+    //일정이 없을경우
     else {
         cal[yea - stdyr][mont][day] = new;
 
@@ -209,7 +211,7 @@ void scdul(void) {
         printf("추가 내용 : %s", cal[yea - stdyr][mont][day]->subj);
     }
 
-    Sleep(2000);
+    Sleep(2300);
     system("cls");
     printf("|| 모드 선택 ||\n1. 달력 / 2. 일정추가 / 3. 일정삭제 / 4. 일정보기 / 5. 종료 >> ");
     scanf_s("%d", &a);
@@ -236,6 +238,7 @@ void dlscdul(void) {
     printf("\n일정을 삭제할 날짜를 입력해주세요(2021년부터)\n\nex)2021 03 07 >> ");
     scanf_s(" %d %d %d", &yea, &mont, &day);
 
+    //일정이 있는지 확인
     if (cal[yea - stdyr][mont][day] == NULL) {
         printf("\n\n일정이 없어 삭제할 수 없습니다\n");
         date();
@@ -247,6 +250,7 @@ void dlscdul(void) {
 
     struct schedule* curr = cal[yea - stdyr][mont][day];
 
+    //맨 앞 일정 지우기
     if (strcmp(curr->subj, subj) == 0) {
         struct schedule* removeNode = curr;
         cal[yea - stdyr][mont][day] = removeNode->next;
@@ -254,6 +258,7 @@ void dlscdul(void) {
         free(removeNode);
     }
 
+    //맨 앞 제외 일정 지우기
     else {
         while (curr != NULL) {
 
@@ -281,7 +286,7 @@ void dlscdul(void) {
 
     system("cls");
     Sleep(1000);
-    printf("일정 삭제 성공!");
+    printf("일정 삭제 성공!"); //삭제 완료 확인
     Sleep(1500);
     system("cls");
     printf("|| 모드 선택 ||\n1. 달력 / 2. 일정추가 / 3. 일정삭제 / 4. 일정보기 / 5. 종료 >> ");
@@ -298,10 +303,11 @@ void dlscdul(void) {
 }
 
 //일정보기
-void lkscdul(void) { //오류
+void lkscdul(void) {
     int a; //사용자 입력 변수
     char b[100]; //사용자 입력 변수
 
+    //배열 처음부터 전부 돌려 일정 출력
     for (int i = 0; i < 10; i++) {
         for (int j = 1; j <= 12; j++) {
             for (int k = 1; k <= 31; k++) {
@@ -315,9 +321,9 @@ void lkscdul(void) { //오류
         }
     }
 
-    printf("\n아무 키나 입력하시면 넘어갑니다 >> ");
+    printf("\n아무거나 입력하시면 넘어갑니다 >> ");
     scanf_s(" %s", b, sizeof(b));
-    Sleep(1000);
+    Sleep(650);
     system("cls");
 
     printf("|| 모드 선택 ||\n1. 달력 / 2. 일정추가 / 3. 일정삭제 / 4. 일정보기 / 5. 종료 >> ");
