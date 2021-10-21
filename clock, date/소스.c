@@ -51,6 +51,7 @@ void date(void) {
     printf("\n몇년 몇월을 볼지 입력해주세요\n\nex)2021 03 >> ");
     scanf_s("%d %d", &year, &month);
 
+    //입력 날짜가 있는지 확인
     if (month > 12 || month < 1 || year < 0) {
         printf("\n입력하신 날짜가 형식에 맞지 않습니다\n다시 입력해주세요");
         Sleep(3000);
@@ -142,7 +143,7 @@ void scdul(void) {
     strcat(nyan, itoa(day, ill, 10));
     strcat(nyan, ".txt");
 
-    if (cal[yea - stdyr][mont][day] != NULL) { //연결 리스트 중
+    if (cal[yea - stdyr][mont][day] != NULL) {
         int num = 0, NUM = 0; //저장용 변수
         char e; //사용자 입력 변수
         char iary[100]; //파일읽기용 변수
@@ -198,8 +199,6 @@ void scdul(void) {
         scanf_s(" %s", new->endtm, sizeof(new->endtm));
         printf("일정 내용을 입력해주세요 >> ");
         scanf_s(" %s", new->subj, sizeof(new->subj));
-
-        free(new);
     }
 
     system("cls");
