@@ -305,6 +305,7 @@ void dlscdul(void) {
 //일정보기
 void lkscdul(void) {
     int a; //사용자 입력 변수
+    int c = 0; //조건문 변수
     char b[100]; //사용자 입력 변수
 
     //배열 처음부터 전부 돌려 일정 출력
@@ -314,9 +315,14 @@ void lkscdul(void) {
 
                 struct schedule* curr = cal[i][j][k];
                 while (curr != NULL) {
+                    if (c == 0)
+                        printf("\n%d년 %d월 %d일 일정", i + stdyr, j, k);
+
                     printf("\n%s\n%s\n%s\n", curr->srttm, curr->endtm, curr->subj);
                     curr = curr->next;
+                    c++;
                 }
+                c = 0;
             }
         }
     }
