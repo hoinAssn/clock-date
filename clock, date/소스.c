@@ -352,5 +352,5 @@ int leapyear(int a) {
     }
     else {
         return 0;
-    }
+    } 
 }
