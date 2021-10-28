@@ -146,6 +146,7 @@ void scdul(void) {
         int num = 0, NUM = 0; //저장용 변수
         char e; //사용자 입력 변수
         char iary[100]; //파일읽기용 변수
+        char sa[20], ve[20]; //저장용 변수
 
         printf("\n\n이미 일정이 있습니다.\n추가하시겠습니까?(y/n) >> ");
         scanf_s(" %c", &e);
@@ -173,9 +174,11 @@ void scdul(void) {
         while (curr != NULL) {
 
             if (curr->next != NULL) {
-                char* ptr = strtok(curr->next->srttm, ":");
+                strcpy(sa, curr->next->srttm);
+                char* ptr = strtok(sa, ":");
                 num = atoi(ptr); //저장 내용
-                char* str = strtok(new->srttm, ":");
+                strcpy(ve, new->srttm);
+                char* str = strtok(ve, ":");
                 NUM = atoi(str); //입력 받은 내용
 
                 if (num < NUM)
